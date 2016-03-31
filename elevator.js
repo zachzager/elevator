@@ -102,11 +102,9 @@ function setup() {
 function setup_form() {
 	form.onsubmit = function(event) {
 		event.preventDefault();
-
 		uploadButton.innerHTML = 'Uploading...'; // Update button text.
-
 		var files = fileSelect.files; // The rest of the code will go here...
-
+		console.log(files);
 		var formData = new FormData();
 
 		// Loop through each of the selected files.
@@ -123,9 +121,7 @@ function setup_form() {
 		}
 
 		formData.append(name, file, filename); // Files
-
 		formData.append(name, blob, filename); // Blobs
-
 		formData.append(name, value);  // Strings
 
 		var xhr = new XMLHttpRequest(); // Set up the request.
