@@ -80,9 +80,7 @@ elevatorState5 = [['A','.','C','D'],
 				 ['.','.','.','.']];
 */
 
-var form = document.getElementById('file-form');
-var fileSelect = document.getElementById('file-select');
-var uploadButton = document.getElementById('upload-button');
+
 
 form.onsubmit = function(event) {
 	event.preventDefault();
@@ -137,6 +135,10 @@ form.onsubmit = function(event) {
 function setup() {
 
 	// get all HTML elements
+	form = document.getElementById('file-form');
+	fileSelect = document.getElementById('file-select');
+	uploadButton = document.getElementById('upload-button');
+	
 	problem = document.getElementById("problem");
 	solution = document.getElementById("solution");
 	start = document.getElementById("start");
