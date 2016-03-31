@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Elevator Problem</title>
+	<!--<link rel="stylesheet" type="text/css" href="style.css">-->
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+	<script src="upload.js"></script>
+	<script src="elevator.js"></script>
+</head>
+
+<body onload="setup()">
+	<h1>Elevator Problem</h1>
+	<hr>
+
+	<h3>Upload elevator state file</h3>
+	<form id="file_form" action="handler.php" method="POST">
+  		<input type="file" id="file_select" name="photos[]" multiple/>
+  		<button type="submit" id="upload-button">Upload</button>
+	</form>
+	<hr>
+
+	<h3>Elevator input</h3>
+	<p>Starting Elevator: <input type="text" id='start' name="starting_elevator"></p>
+	<p>Final Destination (Floor): <input type="text" id='fd_floor' name="final_destination_floor"></p>
+	<p>Final Destination (Time): <input type="text" id='fd_time' name="final_destination_time"></p>
+	<button onClick="calculate()" >Calculate path</button>
+	<button onClick="clearInput()" >Clear input</button>
+	<br>
+	<br>
+	<button onClick="prevState()">Previous state</button>
+	<button onClick="nextState()">Next state</button>
+	<div id="problem"></div>
+	<div id="solution">Solution: </div>
+</body>
+</html>
