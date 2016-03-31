@@ -81,61 +81,57 @@ elevatorState5 = [['A','.','C','D'],
 */
 
 
+function setup_form() {
+	form.onsubmit = function(event) {
+		event.preventDefault();
 
-form.onsubmit = function(event) {
-	event.preventDefault();
+		uploadButton.innerHTML = 'Uploading...'; // Update button text.
 
-	// Update button text.
-	uploadButton.innerHTML = 'Uploading...';
+		var files = fileSelect.files; // The rest of the code will go here...
 
-	// The rest of the code will go here...
-	var files = fileSelect.files;
+		var formData = new FormData();
 
-	var formData = new FormData();
+		// Loop through each of the selected files.
+		for (var i = 0; i < files.length; i++) {
+			var file = files[i];
 
-	// Loop through each of the selected files.
-	for (var i = 0; i < files.length; i++) {
-		var file = files[i];
+			// Check the file type.
+			if (!file.type.match('image.*')) {
+				continue;
+				}
 
-		// Check the file type.
-		if (!file.type.match('image.*')) {
-			continue;
-			}
-
-		// Add the file to the request.
-		formData.append('photos[]', file, file.name);
-	}
-
-	// Files
-	formData.append(name, file, filename);
-
-	// Blobs
-	formData.append(name, blob, filename);
-
-	// Strings
-	formData.append(name, value);   
-
-	// Set up the request.
-	var xhr = new XMLHttpRequest(); 
-
-	// Open the connection.
-	xhr.open('POST', 'handler.php', true);
-
-	// Set up a handler for when the request finishes.
-	xhr.onload = function () {
-		if (xhr.status === 200) {
-			// File(s) uploaded.
-			uploadButton.innerHTML = 'Upload';
-		} else {
-		alert('An error occurred!');
+			// Add the file to the request.
+			formData.append('photos[]', file, file.name);
 		}
-	};
+
+		formData.append(name, file, filename); // Files
+
+		formData.append(name, blob, filename); // Blobs
+
+		formData.append(name, value);  // Strings
+
+		var xhr = new XMLHttpRequest(); // Set up the request.
+
+		// Open the connection.
+		xhr.open('POST', 'handler.php', true);
+
+		// Set up a handler for when the request finishes.
+		xhr.onload = function () {
+			if (xhr.status === 200) {
+				// File(s) uploaded.
+				uploadButton.innerHTML = 'Upload';
+			} else {
+			alert('An error occurred!');
+			}
+		};
+	}
 }
 
 function setup() {
 
 	// get all HTML elements
 	form = document.getElementById('file-form');
+	setup_form();
 	fileSelect = document.getElementById('file-select');
 	uploadButton = document.getElementById('upload-button');
 	
