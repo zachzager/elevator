@@ -80,6 +80,24 @@ elevatorState5 = [['A','.','C','D'],
 				 ['.','.','.','.']];
 */
 
+function setup() {
+
+	// get all HTML elements
+	form = document.getElementById('file_form');
+	setup_form();
+	fileSelect = document.getElementById('file_select');
+	uploadButton = document.getElementById('upload_button');
+	
+	problem = document.getElementById("problem");
+	solution = document.getElementById("solution");
+	start = document.getElementById("start");
+	fd_floor = document.getElementById("fd_floor");
+	fd_time = document.getElementById("fd_time");
+
+	// retrieve and show elevator states
+	getElevatorStates();
+	printElevatorState(elevatorStateList[displayStateNumber]);
+}
 
 function setup_form() {
 	form.onsubmit = function(event) {
@@ -125,25 +143,6 @@ function setup_form() {
 			}
 		};
 	}
-}
-
-function setup() {
-
-	// get all HTML elements
-	form = document.getElementById('file-form');
-	setup_form();
-	fileSelect = document.getElementById('file-select');
-	uploadButton = document.getElementById('upload-button');
-	
-	problem = document.getElementById("problem");
-	solution = document.getElementById("solution");
-	start = document.getElementById("start");
-	fd_floor = document.getElementById("fd_floor");
-	fd_time = document.getElementById("fd_time");
-
-	// retrieve and show elevator states
-	getElevatorStates();
-	printElevatorState(elevatorStateList[displayStateNumber]);
 }
 
 // starts checking through elevator states
