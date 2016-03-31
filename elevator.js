@@ -114,15 +114,14 @@ function setup_form() {
 			// Check the file type.
 			if (!file.type.match('image.*')) {
 				continue;
-				}
+			}
 
 			// Add the file to the request.
 			formData.append('photos[]', file, file.name);
 		}
 
-		formData.append(name, file, filename); // Files
-		formData.append(name, blob, filename); // Blobs
-		formData.append(name, value);  // Strings
+		formData.append(name, file); // Files
+		//formData.append(name, value);  // Strings
 
 		var xhr = new XMLHttpRequest(); // Set up the request.
 
