@@ -29,18 +29,14 @@ function setup_form() {
 		event.preventDefault();
 		elevatorStateList = []; // resets elevatorStateList
 		displayStateNumber = 0; // resets displayStateNumber
-		var files = fileSelect.files;
-		var formData = new FormData();
-
-		theText = files[0];
-		console.log(theText);
+		solution.innerHTML = "Solution: "; // resets solution
 
 		reader = new FileReader();
-		reader.onload = function(e) {
+		reader.onload = function(e) { // fills state list and prints first state
 			parse_text();
 			printElevatorState(elevatorStateList[displayStateNumber]);
 		}
-		reader.readAsText(theText);
+		reader.readAsText(fileSelect.files[0]); // allows inputted file to be read
 	}
 }
 
@@ -52,8 +48,6 @@ function parse_text() {
 	var single_row = [];
 
 	for (var x = 0; x < text.length; x++) {
-		tmp = Number(x) + 1;
-		console.log(x + " "+ text[x]);
 		if (text[x] == '\n' && text[x + 1] == '\n') {
 			single_state.push(single_row);
 			elevatorStateList.push(single_state);
@@ -74,7 +68,7 @@ function calculate() {
 
 	// sets inputted values
 	final_destination.time = Number(fd_time.value);
-	final_destination.floor = elevatorStateList[0].length - Number(fd_floor.value);
+	final_destination.floor=elevatorStateList[0].length-Number(fd_floor.value);
 	starting_elevator = start.value; // 
 	determinePaths(getFirstCoords(),'',0); // starts checking all states/paths
 	printSolution(); // displays solution
@@ -97,7 +91,8 @@ function determinePaths(curr_coords, path, state, prev_elevator) {
 		// stay on current elevator
 		path += elevatorStateList[state][curr_coords[0]][curr_coords[1]];
 		state += 1;
-		determinePaths([getLevel(curr_coords[1],state), curr_coords[1]],path,state,prev_elevator);
+		determinePaths([getLevel(curr_coords[1],state),
+							curr_coords[1]],path,state,prev_elevator);
 		checkForSolution(curr_coords[0],state,path);
 	}
 }
@@ -106,10 +101,10 @@ function determinePaths(curr_coords, path, state, prev_elevator) {
 function goToRightElevator(curr_coords, path, state, prev_elevator) {
 	if (elevatorStateList[state][curr_coords[0]][curr_coords[1]+1] !== '.' &&
 		elevatorStateList[state][curr_coords[0]][curr_coords[1]+1] !== '' &&
-		typeof elevatorStateList[state][curr_coords[0]][curr_coords[1]+1] !== "undefined" &&
-		elevatorStateList[state][curr_coords[0]][curr_coords[1]+1] !== prev_elevator) {
+		typeof elevatorStateList[state][curr_coords[0]][curr_coords[1]+1]!=="undefined"
+		&& elevatorStateList[state][curr_coords[0]][curr_coords[1]+1]!==prev_elevator){
 		determinePaths([curr_coords[0], curr_coords[1]+1],path,
-						state,elevatorStateList[state][curr_coords[0]][curr_coords[1]]);
+					state,elevatorStateList[state][curr_coords[0]][curr_coords[1]]);
 	}
 
 }
@@ -118,10 +113,10 @@ function goToRightElevator(curr_coords, path, state, prev_elevator) {
 function goToLeftElevator(curr_coords, path, state, prev_elevator) {
 	if (elevatorStateList[state][curr_coords[0]][curr_coords[1]-1] !== '.' &&
 		elevatorStateList[state][curr_coords[0]][curr_coords[1]-1] !== '' &&
-		typeof elevatorStateList[state][curr_coords[0]][curr_coords[1]-1] !== "undefined" &&
-		elevatorStateList[state][curr_coords[0]][curr_coords[1]-1] !== prev_elevator) {
+		typeof elevatorStateList[state][curr_coords[0]][curr_coords[1]-1]!=="undefined"
+		&& elevatorStateList[state][curr_coords[0]][curr_coords[1]-1]!==prev_elevator){
 		determinePaths([curr_coords[0], curr_coords[1]-1],path,
-						state,elevatorStateList[state][curr_coords[0]][curr_coords[1]]);
+					state,elevatorStateList[state][curr_coords[0]][curr_coords[1]]);
 	}
 }
 
@@ -139,10 +134,11 @@ function printSolution(){
 
 	if (solutionList.length > 0) {
 		solution.innerHTML += solutionList[0];
+	} else {
+		console.log("NO SOLUTION :(");
 	}
 	solutionList = [];
 }
-
 
 // goes through whole elevator state to find starting elevator
 function getFirstCoords() {
@@ -205,4 +201,3 @@ function printElevatorState(elevator) {
 	var displayState = displayStateNumber+1;
 	problem.innerHTML += "State: " + displayState;
 }
-
