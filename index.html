@@ -3,32 +3,34 @@
 
 <head>
 	<title>Elevator Problem</title>
-
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="elevator.js"></script>
 </head>
 
 <body onload="setup()">
+<div class="container">
+ 	<div class="jumbotron">
 	<h1>Elevator Problem</h1>
 	<hr>
-
-	<h3>Upload elevator state file</h3>
+	<h4>Upload elevator state file</h4>
 	<form id="file_form" action="handler.php" method="POST">
-  		<input type="file" id="file_select" name="photos[]" multiple/>
+  		<input type="file" id="file_select"/>
   		<button type="submit" id="upload_button">Upload</button>
 	</form>
-	<hr>
-
+	<span>Note: Input files should have one line between each elevator state and two lines after the final elevator state</span>
+	</div>
 	<h3>Elevator input</h3>
 	<p>Starting Elevator: <input type="text" id='start' name="starting_elevator"></p>
 	<p>Final Destination (Floor): <input type="text" id='fd_floor' name="final_destination_floor"></p>
 	<p>Final Destination (Time): <input type="text" id='fd_time' name="final_destination_time"></p>
 	<button onClick="calculate()" >Calculate path</button>
 	<button onClick="clearInput()" >Clear input</button>
-	<br>
-	<br>
+	<br><br>
 	<button onClick="prevState()">Previous state</button>
 	<button onClick="nextState()">Next state</button>
 	<div id="problem"></div>
 	<div id="solution">Solution: </div>
+</div>
 </body>
 </html>

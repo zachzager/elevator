@@ -1,0 +1,9 @@
+/* style.css */
+
+* {
+	text-align: center;
+}
+
+#file_select { 
+	margin: 0 auto;
+}
